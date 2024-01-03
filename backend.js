@@ -109,6 +109,25 @@ app.get('/Xboxtart', (req, res) => {
 })
 
 
+/*---------Renddelés leadása, feltöltése a táblába-----------*/
+
+app.post('/rendeles', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query(`INSERT INTO rendeles VALUES(NULL, '${req.body.nev}','${req.body.email}','${req.body.telefonszam}')`, (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
 
 /*---------Összes eszköz kiíratása-----------*/
 
