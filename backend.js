@@ -89,6 +89,27 @@ app.get('/Playstationtart', (req, res) => {
 })
 
 
+
+/*---------Összes Xbox kiíratása-----------*/
+
+app.get('/Xboxtart', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM alkatreszek WHERE alkatresz_eszkozid=4', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
+
 /*---------Összes eszköz kiíratása-----------*/
 
 app.get('/eszkozok', (req, res) => {
@@ -131,7 +152,7 @@ kapcsolat()
 //connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-12-11', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, 'kepx.jpg', 2, 2);`, (err, rows, fields) => {
   //INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-02-03', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, 'kepx.jpg', 2, 2);
 //`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-02-03', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, '${req.files[0].filename}', 2, 2);`
-connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-12-11', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, '${req.files[0].filename}', 2, 2);`, (err, rows, fields) => {
+connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-12-11', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, '${req.files[0].filename}', 2, '${req.body.bevitel5}');`, (err, rows, fields) => {
 if (err){
   console.log("Hiba")
   res.send("Hiba")
