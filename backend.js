@@ -35,6 +35,25 @@ app.get('/', (req, res) => {
 
 
 
+/*---------Összes alkatrész kiíratása-----------*/
+
+app.get('/osszesAlkatresz', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM alkatreszek', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
 /*---------Összes pc alkatrész kiíratása-----------*/
 
 app.get('/pcAlkatresz', (req, res) => {
@@ -109,6 +128,26 @@ app.get('/Xboxtart', (req, res) => {
 })
 
 
+
+/*---------Összes hasznalt kiíratása-----------*/
+
+app.get('/Hasznalttart', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM hasznalttermekek', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
 /*---------Renddelés leadása, feltöltése a táblába-----------*/
 
 app.post('/rendeles', (req, res) => {
@@ -147,6 +186,24 @@ app.get('/eszkozok', (req, res) => {
     connection.end()
 })
 
+/*---------Szöveg keresése-----------*/
+//SELECT * FROM alkatreszek INNER JOIN komponens ON alkatresz_komponensid=komponens_id WHERE komponens_nev LIKE "%${req.body.bevitel1}%"
+app.post('/keresszoveg', (req, res) => {
+  kapcsolat()
+  
+  connection.query(`SELECT * FROM alkatreszek INNER JOIN komponens ON alkatresz_komponensid=komponens_id WHERE komponens_id = ${req.body.bevitel1}`, (err, rows, fields) => {
+  if (err) {
+    console.log("Hiba")
+  }
+  else{
+    console.log(rows)
+    res.send(rows)
+  }
+  
+  })
+  connection.end() 
+  })
+
 //----------Kép feltöltés-----------------------------
 
 const storage = multer.diskStorage({
@@ -163,6 +220,7 @@ const upload = multer({ storage });
 app.post('/api/upload', upload.array('photo', 3), (req, res) => {
   console.log('file', req.files);
   console.log('body', req.body);
+
 
 
 //-------adatbazisfeltoltes---------
