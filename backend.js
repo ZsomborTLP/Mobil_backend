@@ -72,6 +72,26 @@ app.get('/pcAlkatresz', (req, res) => {
     connection.end()
 })
 
+
+/*---------Összes pc jatek kiíratása-----------*/
+
+app.get('/PcJatekok', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM jatekok WHERE jatekok_eszkozid=1', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
 /*---------Összes Nintendo kiíratása-----------*/
 
 app.get('/Nintendotart', (req, res) => {
@@ -89,6 +109,27 @@ app.get('/Nintendotart', (req, res) => {
 
     connection.end()
 })
+
+
+/*---------Összes Ninetndo jatek kiíratása-----------*/
+
+app.get('/NintendoJatekok', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM jatekok WHERE jatekok_eszkozid=2', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
+
+
 /*---------Összes playstation kiíratása-----------*/
 
 app.get('/Playstationtart', (req, res) => {
@@ -107,7 +148,23 @@ app.get('/Playstationtart', (req, res) => {
     connection.end()
 })
 
+/*---------Összes playstation jatek kiíratása-----------*/
 
+app.get('/PlaystationJatekok', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM jatekok WHERE jatekok_eszkozid=3', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
 
 /*---------Összes Xbox kiíratása-----------*/
 
@@ -127,6 +184,23 @@ app.get('/Xboxtart', (req, res) => {
     connection.end()
 })
 
+/*---------Összes xbox jatek kiíratása-----------*/
+
+app.get('/XboxJatekok', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM jatekok WHERE jatekok_eszkozid=4', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+
+
+
+    connection.end()
+})
 
 
 /*---------Összes hasznalt kiíratása-----------*/
