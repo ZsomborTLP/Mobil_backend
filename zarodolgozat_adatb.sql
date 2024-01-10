@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 09. 14:16
+-- Létrehozás ideje: 2024. Jan 10. 11:13
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -104,7 +104,10 @@ INSERT INTO `alkatreszek` (`alkatresz_id`, `alkatresz_info`, `alkatresz_megjelen
 (66, 'Kingston KC3000 1TB M 2 NVMe PCIe (SKC3000S/1024G)', '2021-08-02', 1, 33990, 'kep60.jpg', 1, 7),
 (67, 'Kingston FURY Renegade 1TB M.2 PCIe NVMe (SFYRS/1000G)', '2023-07-28', 1, 34690, 'kep61.jpg', 1, 7),
 (68, 'Samsung 2.5 870 EVO 1TB SATA3 (MZ-77E1T0B)', '2023-09-21', 3, 32990, 'kep62.jpg', 1, 7),
-(69, 'Seagate Lange 15.36TB SAS 12Gb/s, 15mm, 0.7DWPD, SED, HF, RoHS - XS15360TE70014', '2023-12-01', 5, 2386099, 'kep63.jpg', 1, 7);
+(69, 'Seagate Lange 15.36TB SAS 12Gb/s, 15mm, 0.7DWPD, SED, HF, RoHS - XS15360TE70014', '2023-12-01', 5, 2386099, 'kep63.jpg', 1, 7),
+(70, 'Thrustmaster T-3PM Pedals', '2019-09-27', 2, 49990, 'kep64.jpg\n', 4, 8),
+(71, 'Thrustmaster Racing Clamp\r\n', '2020-06-09', 2, 41790, 'kep65.jpg', 3, 8),
+(72, 'Logitech Driving Force Shifter', '2021-11-29', 3, 17890, 'kep66.jpg', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -349,7 +352,7 @@ ALTER TABLE `rendeles`
 -- AUTO_INCREMENT a táblához `alkatreszek`
 --
 ALTER TABLE `alkatreszek`
-  MODIFY `alkatresz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `alkatresz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT a táblához `eszkozok`
@@ -367,7 +370,7 @@ ALTER TABLE `hasznalttermekek`
 -- AUTO_INCREMENT a táblához `jatekok`
 --
 ALTER TABLE `jatekok`
-  MODIFY `jatekok_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `jatekok_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT a táblához `komponens`
