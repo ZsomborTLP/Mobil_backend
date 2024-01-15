@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 
 const app = express()
-const port = 3000
+const port = 22003
 
 app.use(cors())
 app.use(express.json())
@@ -19,10 +19,10 @@ var connection;
 function kapcsolat(){
     
      connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'zarodolgozat_adatb'
+        host: '192.168.100.103',
+        user: 'u71_CEC3VCKm5g',
+        password: 'NoOG+!kLVjr@L0TsyZvvQtcl',
+        database: 's71_db'
     })
 
     connection.connect()
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 
 
-/*---------Összes alkatrész kiíratása-----------*/
+/*---------Összes alkatrész kiíratása--Zsombi---------*/
 
 app.get('/osszesAlkatresz', (req, res) => {
     
@@ -54,7 +54,7 @@ app.get('/osszesAlkatresz', (req, res) => {
 })
 
 
-/*---------Összes pc alkatrész kiíratása-----------*/
+/*---------Összes pc alkatrész kiíratása--Zsombi---------*/
 
 app.get('/pcAlkatresz', (req, res) => {
     
@@ -73,7 +73,7 @@ app.get('/pcAlkatresz', (req, res) => {
 })
 
 
-/*---------Összes pc jatek kiíratása-----------*/
+/*---------Összes pc jatek kiíratása--Lali---------*/
 
 app.get('/PcJatekok', (req, res) => {
     
@@ -92,7 +92,7 @@ app.get('/PcJatekok', (req, res) => {
 })
 
 
-/*---------Összes Nintendo kiíratása-----------*/
+/*---------Összes Nintendo kiíratása--Lali---------*/
 
 app.get('/Nintendotart', (req, res) => {
     
@@ -111,7 +111,7 @@ app.get('/Nintendotart', (req, res) => {
 })
 
 
-/*---------Összes Ninetndo jatek kiíratása-----------*/
+/*---------Összes Ninetndo jatek kiíratása--Lali---------*/
 
 app.get('/NintendoJatekok', (req, res) => {
     
@@ -130,7 +130,7 @@ app.get('/NintendoJatekok', (req, res) => {
 })
 
 
-/*---------Összes playstation kiíratása-----------*/
+/*---------Összes playstation kiíratása--Lali---------*/
 
 app.get('/Playstationtart', (req, res) => {
     
@@ -148,7 +148,7 @@ app.get('/Playstationtart', (req, res) => {
     connection.end()
 })
 
-/*---------Összes playstation jatek kiíratása-----------*/
+/*---------Összes playstation jatek kiíratása--Lali---------*/
 
 app.get('/PlaystationJatekok', (req, res) => {
     
@@ -166,7 +166,7 @@ app.get('/PlaystationJatekok', (req, res) => {
     connection.end()
 })
 
-/*---------Összes Xbox kiíratása-----------*/
+/*---------Összes Xbox kiíratása--Lali---------*/
 
 app.get('/Xboxtart', (req, res) => {
     
@@ -184,7 +184,7 @@ app.get('/Xboxtart', (req, res) => {
     connection.end()
 })
 
-/*---------Összes xbox jatek kiíratása-----------*/
+/*---------Összes xbox jatek kiíratása--Lali---------*/
 
 app.get('/XboxJatekok', (req, res) => {
     
@@ -203,7 +203,7 @@ app.get('/XboxJatekok', (req, res) => {
 })
 
 
-/*---------Összes hasznalt kiíratása-----------*/
+/*---------Összes hasznalt kiíratása--Zsombi---------*/
 
 app.get('/Hasznalttart', (req, res) => {
     
@@ -222,7 +222,7 @@ app.get('/Hasznalttart', (req, res) => {
 })
 
 
-/*---------Renddelés leadása, feltöltése a táblába-----------*/
+/*---------Renddelés leadása, feltöltése a táblába--Zsombi---------*/
 
 app.post('/rendeles', (req, res) => {
     
@@ -242,7 +242,7 @@ app.post('/rendeles', (req, res) => {
 
 
 
-/*---------Összes eszköz kiíratása-----------*/
+/*---------Összes eszköz kiíratása--Zsombi---------*/
 
 app.get('/eszkozok', (req, res) => {
     
@@ -259,8 +259,47 @@ app.get('/eszkozok', (req, res) => {
 
     connection.end()
 })
+//----Comment lekerdez--Lali-------------
 
-/*---------Szöveg keresése-----------*/
+app.get('/Comment', (req, res) => {
+    
+  kapcsolat()
+
+    connection.query('SELECT * FROM comment', (err, rows, fields) => {
+    if (err) throw err
+
+        console.log(rows)
+        res.send(rows)
+    })
+ 
+
+
+    connection.end()
+})
+
+//--------- comment feltöltés-Lali----------
+app.post('/CommentFeltoltes', (req, res) => {
+
+  kapcsolat()
+  connection.query(`INSERT INTO comment VALUES (NULL, '${req.body.nev}', '${req.body.comment}','${req.body.datum}' );`, (err, rows, fields) => {
+    if (err) {
+      console.log("Hiba")
+        console.log(req.bod.nev)
+        console.log(req.bod.comment)
+        console.log(req.bod.datum)
+      res.send("Hiba")
+    }
+    else {
+      console.log("Sikeres felvitel")
+      res.send("Sikeres felvitel")
+    }
+
+  })
+  connection.end()
+});
+
+
+/*---------Szöveg keresése--Zsombi---------*/
 //SELECT * FROM alkatreszek INNER JOIN komponens ON alkatresz_komponensid=komponens_id WHERE komponens_nev LIKE "%${req.body.bevitel1}%"
 app.post('/keresszoveg', (req, res) => {
   kapcsolat()
@@ -278,7 +317,7 @@ app.post('/keresszoveg', (req, res) => {
   connection.end() 
   })
 
-//----------Kép feltöltés-----------------------------
+//----------Kép feltöltés--Közös---------------------------
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
@@ -297,15 +336,24 @@ app.post('/api/upload', upload.array('photo', 3), (req, res) => {
 
 
 
-//-------adatbazisfeltoltes---------
+//-------adatbazisfeltoltes--Zsombi-------
 kapcsolat()
   
 //connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-12-11', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, 'kepx.jpg', 2, 2);`, (err, rows, fields) => {
   //INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-02-03', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, 'kepx.jpg', 2, 2);
 //`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-02-03', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, '${req.files[0].filename}', 2, 2);`
-connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '2023-12-11', '${req.body.bevitel2}', '${req.body.bevitel3}' , ${req.body.bevitel4}, '${req.files[0].filename}', 2, '${req.body.bevitel5}');`, (err, rows, fields) => {
+    
+connection.query(`INSERT INTO hasznalttermekek VALUES (NULL, '${req.body.bevitel1}', '${req.body.datum}', '${req.body.bevitel2}', '${req.body.bevitel3}' , '${req.body.bevitel4}', '${req.files[0].filename}', '2', '${req.body.bevitel5}');`, (err, rows, fields) => {
 if (err){
-  console.log("Hiba")
+  console.log("Hiba",err)
+    /*
+    console.log(req.body.bevitel1)
+    console.log(req.body.bevitel2)
+    console.log(req.body.bevitel3)
+    console.log(req.body.bevitel4)
+    console.log(req.body.bevitel5)
+    console.log(req.files[0].filename)
+    */
   res.send("Hiba")
 }
 else{
@@ -341,7 +389,7 @@ connection.end()
 //   connection.end() 
 //   })
 
-//---------------------------------seged tabla lekerdez
+//---------------------------------seged tabla lekerdez--Zsombi-------------
 app.get('/KomponensSeged', (req, res) => {
     
   kapcsolat()
@@ -358,7 +406,7 @@ app.get('/KomponensSeged', (req, res) => {
     connection.end()
 })
 
-//-----------------------alkatresz seged
+//-----------------------alkatresz seged--Lali
 app.get('/EszkozokSeged', (req, res) => {
     
   kapcsolat()
